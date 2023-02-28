@@ -1,2 +1,0 @@
-# SilkRoad
-E-commerce platform.
