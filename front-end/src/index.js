@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
-import "antd/dist/antd.css"
+// we replaced the below import with the min to remove warning WARNING in ./node_modules/antd/dist/antd.css
+// import "antd/dist/antd.css"
+import 'antd/dist/antd.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
