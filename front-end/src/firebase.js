@@ -5,12 +5,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "your apiKey",
-  authDomain: "ayour uthDomain",
-  projectId: "your projectId",
-  storageBucket: "your storageBucket",
-  messagingSenderId: "your messagingSenderId",
-  appId: "your appId",
+  apiKey: "AIzaSyBGLGOVt9YnvJloQR8jSV8KeaAG6cW5CWA",
+  authDomain: "silkroad-12211.firebaseapp.com",
+  projectId: "silkroad-12211",
+  storageBucket: "silkroad-12211.appspot.com",
+  messagingSenderId: "727118286050",
+  appId: "1:727118286050:web:29431821fb67f2e831a2bb",
 };
 
 // initialize firebase app
