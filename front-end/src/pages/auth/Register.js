@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { sendSignInLinkToEmail } from "firebase/auth";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,15 +10,15 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const actionCodeSettings = {
-      url: 'https://malek-joseph-fantastic-robot-p96v6v9gpgg2rj9g-3000.preview.app.github.dev/register/complete',
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
-    console.log(process.env.REACT_APP_REGISTER_REDIRECT_URL);
+    // console.log(process.env.REACT_APP_REGISTER_REDIRECT_URL);
 
     await sendSignInLinkToEmail(auth, email, actionCodeSettings);
 
-    window.localStorage.setItem("emailForSignIn", email);
+    window.localStorage.setItem("emailForRegistration", email);
 
     toast.success(
       `Email is sent to ${email}. Click the link to complete your registration`
@@ -50,7 +50,6 @@ const Register = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h4>Register</h4>
-          <ToastContainer />
           {registerForm()}
         </div>
       </div>
