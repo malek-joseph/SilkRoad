@@ -16,7 +16,7 @@ import rootReducer from './reducers/index.js'
 
 
 // We separate the reduceres in a separate folder for reducers and index.js there will combine and control them.
-const store = createStore(rootReducer, composeWithDevTools)
+const store = createStore(rootReducer, composeWithDevTools())
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,7 +28,7 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
     
-    <Provider/>
+    </Provider>
 
 
 );

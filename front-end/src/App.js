@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
+import React, { useEffect } from "react";
 
 
 import { Login } from './pages/auth/Login'
@@ -12,11 +13,35 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@popperjs/core';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
 
 
 
+const App = () => {
+  const dispatch = useDispatch();
 
-function App() {
+  // We use useEffect to check firebase auth state
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const idTokenResult = await user.getIdTokenResult();
+        console.log("user", user);
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+        });
+      }
+    });
+    // cleanup
+    return () => unsubscribe();
+  }, []);
+
+
+
   return (
     <>
       <Header />
