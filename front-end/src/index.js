@@ -9,15 +9,28 @@ import 'antd/dist/antd.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import rootReducer from './reducers/index.js'
+
+
+// We separate the reduceres in a separate folder for reducers and index.js there will combine and control them.
+const store = createStore(rootReducer, composeWithDevTools)
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
+      <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
+    
+    <Provider/>
+
+
 );
 
 // If you want to start measuring performance in your app, pass a function
