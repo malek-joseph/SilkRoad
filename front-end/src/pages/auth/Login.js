@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -41,6 +41,13 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  // We destructure user from the state of redux 
+  const { user } = useSelector((state) => ({ ...state }));
+  // redirect the user to home if he's aleady logged in
+  useEffect(() => {
+    if (user && user.token) navigate('/', { replace: true })
+  }, [user]);
 
   const googleLogin = async () => {
     auth

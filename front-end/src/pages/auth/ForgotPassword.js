@@ -11,6 +11,14 @@ const ForgotPassword = ({ history }) => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  // We destructure user from the state of redux 
+  const { user } = useSelector((state) => ({ ...state }));
+
+
+  // redirect the user to home if he's aleady logged in
+  useEffect(() => {
+    if (user && user.token) navigate('/', { replace: true })
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

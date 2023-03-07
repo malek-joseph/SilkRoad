@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+
+  let dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +27,14 @@ const Register = () => {
     // clear state
     setEmail("");
   };
+
+
+  // We destructure user from the state of redux 
+  const { user } = useSelector((state) => ({ ...state }));
+  // redirect the user to home if he's aleady logged in
+  useEffect(() => {
+    if (user && user.token) navigate('/', { replace: true })
+  }, [user]);
 
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
