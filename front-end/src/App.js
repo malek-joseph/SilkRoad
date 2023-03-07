@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 
 
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
+        <Route exact path="/forgot/password" element={<ForgotPassword />} />
       </Routes>
     </>
 

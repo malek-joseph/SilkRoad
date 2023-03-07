@@ -5,6 +5,8 @@ import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 
 
 const Login = () => {
@@ -124,6 +126,9 @@ const Login = () => {
           >
             Login with Google
           </Button>
+          <NavLink to="/forgot/password" className="float-right text-danger">
+            Forgot Password
+          </NavLink>
         </div>
       </div>
     </div>
