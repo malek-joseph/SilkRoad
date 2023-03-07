@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import React, { useEffect } from "react";
 
 
-import { Login } from './pages/auth/Login'
+import  Login  from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import { Home } from './pages/Home'
 import Header from "./components/nav/Header";
