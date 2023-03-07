@@ -1,49 +1,43 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
-import { sendSignInLinkToEmail } from "firebase/auth";
 import { toast } from "react-toastify";
-
 
 const Register = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const actionCodeSettings = {
+    // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
+    const config = {
       url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
-    // console.log(process.env.REACT_APP_REGISTER_REDIRECT_URL);
-
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-
-    window.localStorage.setItem("emailForRegistration", email);
-
+    await auth.sendSignInLinkToEmail(email, config);
     toast.success(
-      `Email is sent to ${email}. Click the link to complete your registration`
+      `Email is sent to ${email}. Click the link to complete your registration.`
     );
-
+    // save user email in local storage
+    window.localStorage.setItem("emailForRegistration", email);
+    // clear state
     setEmail("");
   };
 
-  const registerForm = () => {
-    return (
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          className="form-control"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoFocus
-        />
+  const registerForm = () => (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        className="form-control"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoFocus
+      />
 
-        <button className="btn btn-light" type="submit">
-          Register
-        </button>
-      </form>
-    );
-  };
+      <button type="submit" className="btn btn-raised">
+        Register
+      </button>
+    </form>
+  );
 
   return (
     <div className="container p-5">

@@ -32,6 +32,7 @@ const App = () => {
           payload: {
             email: user.email,
             token: idTokenResult.token,
+
           },
         });
       }
