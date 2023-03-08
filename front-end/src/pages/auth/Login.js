@@ -6,8 +6,19 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-
+const createOrUpdateUser = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/create-or-update-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
 
 const Login = () => {
   const [email, setEmail] = useState("gqlreactnode@gmail.com");
@@ -26,14 +37,17 @@ const Login = () => {
       // console.log(result);
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
-
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload: {
-          email: user.email,
-          token: idTokenResult.token,
-        },
-      });
+      createOrUpdateUser(idTokenResult.token)
+        .then((res) => console.log("CREATE OR UPDATE RES", res))
+        .catch(()=> console.log("error"));
+      
+      // dispatch({
+      //   type: "LOGGED_IN_USER",
+      //   payload: {
+      //     email: user.email,
+      //     token: idTokenResult.token,
+      //   },
+      // });
       navigate('/', { replace: true })
     } catch (error) {
       console.log(error);
