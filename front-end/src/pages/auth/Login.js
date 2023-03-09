@@ -10,7 +10,7 @@ import axios from "axios";
 
 const createOrUpdateUser = async (authtoken) => {
   return await axios.post(
-    `${process.env.REACT_APP_API}/create-or-update-user`,
+    'https://malek-joseph-fantastic-robot-p96v6v9gpgg2rj9g-8000.preview.app.github.dev/api/create-or-update-user',
     {},
     {
       headers: {
@@ -19,6 +19,7 @@ const createOrUpdateUser = async (authtoken) => {
     }
   );
 };
+
 
 const Login = () => {
   const [email, setEmail] = useState("gqlreactnode@gmail.com");
@@ -38,9 +39,15 @@ const Login = () => {
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
       createOrUpdateUser(idTokenResult.token)
-        .then((res) => console.log("CREATE OR UPDATE RES", res))
-        .catch(()=> console.log("error"));
-      
+        .then((res) => {
+
+          console.log("CREATE OR UPDATE RES", res)
+        })
+        .catch(() => {
+          console.log(idTokenResult);
+          console.log("error")
+        });
+
       // dispatch({
       //   type: "LOGGED_IN_USER",
       //   payload: {
@@ -134,7 +141,7 @@ const Login = () => {
           ) : (
             <h4>Login</h4>
           )}
-     
+
           {loginForm()}
           <Button
             onClick={googleLogin}
